@@ -1,0 +1,134 @@
+
+
+.cartitems { 
+    margin: 100px 170px; 
+
+}
+
+.cartitems  hr{ 
+    height: 3px; 
+    background: #e2e2e2; 
+    border: 0; 
+
+}
+
+.cartitems-format-main  {
+    display: grid; 
+    grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr 1fr; 
+    align-items: center; 
+    gap: 75px; 
+    padding: 22px 0px; 
+    color: #454545; 
+    font-size: 18px; 
+    font-weight: 600; 
+
+
+    
+}
+
+.cartitems-format {
+    font-size: 17px; 
+    font-weight: 500; 
+}
+
+.carticon-product-icon { 
+    height: 120px;
+
+}
+
+.cartitems-remove-icon {
+    width: 15px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+    .cartitems-remove-icon:hover {
+        transform: scale(1.2);
+    }
+
+
+
+.cartitems-down {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #ffffff; /* White background for contrast */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    max-width: 400px; /* Limit the width for better layout */
+    margin: 20px auto; /* Center the container */
+}
+
+/* Title for the cart total section */
+.cartitems-total h1 {
+    font-size: 1.5rem; /* Larger font size */
+    text-align: center; /* Center-align text */
+    color: #333; /* Dark grey color for contrast */
+    margin-bottom: 20px; /* Space below the title */
+}
+
+/* Horizontal rule styling for separation */
+hr {
+    border: none;
+    border-top: 1px solid #ddd; /* Light grey line for separation */
+    margin: 10px 0; /* Margin around the line */
+}
+
+/* Button styling */
+button {
+    width: 100%; /* Full width for easier interaction */
+    padding: 12px; /* Padding for better UX */
+    background-color: #007bff; /* Blue background */
+    color: #fff; /* White text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 1rem; /* Standard font size */
+    margin-top: 20px; /* Space above the button */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+/* Promo code input and button container */
+.cartitems-promobox {
+    display: flex; /* Align items horizontally */
+    align-items: center; /* Center items vertically */
+    margin-top: 10px;
+
+}
+
+    /* Styling for the promo code input */
+    .cartitems-promobox input[type='text'] {
+        display: flex; 
+        padding: 12px;
+        height: 20px; /* Explicit height for alignment */
+        border: 1px solid #ddd;
+        border-right: none; /* Remove right border to blend with button */
+        border-radius: 5px 0 0 5px; /* Rounded corners on the left */
+        font-size: 0.9rem;
+        box-shadow: none; /* Remove inner shadow */
+    }
+
+    /* Styling for the promo code button */
+    .cartitems-promobox button {
+        padding: 0 20px; /* Remove vertical padding, set horizontal */
+        height: 40px; /* Explicit height for alignment */
+        background-color: #28a745;
+        color: #fff;
+        border: 1px solid #28a745; /* Same border color as background */
+        border-radius: 0 5px 5px 0; /* Rounded corners on the right */
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background-color 0.3s ease;
+        white-space: nowrap; /* Prevent text from wrapping */
+    }
+
+        /* Promo button hover effect */
+        .cartitems-promobox button:hover {
+            background-color: #218838;
+        }
