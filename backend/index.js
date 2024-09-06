@@ -21,6 +21,79 @@ app.get('/', (req, res) => {
 })
 
 
+// Schema for Creating Product 
+// Essentially the ProductTable Schema
+const Product = mongoose.model("Product", {
+    id: {
+        type: Number, 
+        required: true,
+    },
+
+    name: { 
+        type: String, 
+        required: true,
+    },
+
+    image: { 
+        type: String, 
+        required: true,
+    }, 
+
+
+    category: { 
+        type: String, 
+        required: true,
+    }, 
+
+    newPrice: {
+        type: Number, 
+        required: true,
+    }, 
+
+    oldPrice: { 
+        type: Number, 
+        required: true,
+    }, 
+
+    date: { 
+        type: Date, 
+        default: Date.now,
+    },
+
+    available: { 
+        type: Boolean, 
+        default: true, 
+    }
+
+
+
+})
+
+app.post('/addproduct', async (req, res) => {
+    // Pass and object into the product
+    const product = new Product({
+        id: req.body.id, 
+        name: req.body.name,
+        image: req.body.image,
+        category: req.body.category,
+        newPrice: req.body.newPrice, 
+        oldPrice: req.body.oldPrice,
+        
+
+    });
+
+    console.log(product); 
+    // Saviing then we use await which will take time 
+    await product.save(); 
+    console.log('Product Saved.')
+    res.json({
+        success: true,
+        name: req.body.name,
+    })
+})
+
+
+
 
 
 app.listen(port, (err) => { 
