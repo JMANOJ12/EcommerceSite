@@ -64,27 +64,40 @@ const Product = mongoose.model("Product", {
         type: Boolean, 
         default: true, 
     }
-
-
-
 })
 
+
+
+// Add Product Endpoint is currently working
 app.post('/addproduct', async (req, res) => {
+    let products = await Product.find({}); // Basically find in the products table
+    let id; 
+
+    // If the length > 0, then that means product is available in the database
+    if (products.length > 0) { 
+        let last_product_array = products.slice(-1); // Last Product
+        let last_product = last_product_array[0]; 
+        id = last_product.id + 1; 
+
+    } else { 
+        id = 1; 
+    }
+
+
+
     // Pass and object into the product
     const product = new Product({
-        id: req.body.id, 
+        id:id, 
         name: req.body.name,
         image: req.body.image,
         category: req.body.category,
         newPrice: req.body.newPrice, 
-        oldPrice: req.body.oldPrice,
-        
-
+        oldPrice: req.body.oldPrice,    
     });
 
     console.log(product); 
     // Saviing then we use await which will take time 
-    await product.save(); 
+    await product.save(); // This will save to the database 
     console.log('Product Saved.')
     res.json({
         success: true,
@@ -92,15 +105,23 @@ app.post('/addproduct', async (req, res) => {
     })
 })
 
+// Creating API for Deleting Product
+app.post('/remove-product', async (req,res)=> {
+    await Product.findOneAndDelete({id: req.body.id}); 
+    console.log('Product Sucessfully Removed'); 
+    res.json({
+        sucess: true, 
+        name: req.body.name
+    })
+})
 
 
-
-
+// Normal Code where the Server is listening on a particular port
 app.listen(port, (err) => { 
     if (!err) {
         console.log("Server listening on PORT", port);
     } else { 
-        console.lo("Error: " + err); 
+        console.log("Error: " + err); 
 
     }
 })
@@ -109,12 +130,23 @@ app.listen(port, (err) => {
 // Image Storage Engine
 const storage = multer.diskStorage({
     destination: './upload/images', 
-    fileName: (req, file, cb) => {
-        return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`); 
-
+    filename: (req, file, cb) => {
+        cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`);
     }
+});
 
-}); 
+// Creating API For getting all the products 
+// Another endpoint for retrieving all of the products
+
+app.get('/allproducts', async(req, res)=> {
+    // Retrieves the array full of the items
+    let products = await Product.find({});
+    console.log('All Products Fetched'); 
+    res.send(products); 
+})
+
+
+
 
 const upload = multer({
     storage: storage
@@ -124,9 +156,11 @@ const upload = multer({
 // Creating Upload Endpoint For Images
 app.use('/images', express.static('upload/images')); 
 app.post('/upload', upload.single('product'), (req, res) => { 
+    // This would be the json response that is returned back
     res.json({
+
         success: 1,
-        image_url: `http://localhost:${port}/images/${req.file.fileName}`
+        image_url: `http://localhost:${port}/images/${req.file.filename}`
     })
 })
 
